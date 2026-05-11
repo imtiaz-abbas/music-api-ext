@@ -5,7 +5,7 @@ module Mutations
     argument :name, String, required: true
 
     field :playlist, Types::PlaylistType, null: true
-    field :errors,   [String],            null: false
+    field :errors,   [ String ],            null: false
 
     def resolve(name:)
       playlist = Playlist.new(name: name)

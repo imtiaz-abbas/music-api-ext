@@ -3,7 +3,7 @@
 module Types
   class QueryType < Types::BaseObject
     # --- Artists ---
-    field :artists, [Types::ArtistType], null: false,
+    field :artists, [ Types::ArtistType ], null: false,
       description: "Returns all artists"
     def artists
       Artist.all
@@ -20,7 +20,7 @@ module Types
     end
 
     # --- Songs ---
-    field :songs, [Types::SongType], null: false,
+    field :songs, [ Types::SongType ], null: false,
       description: "Returns all songs"
     def songs
       Song.all
@@ -37,7 +37,7 @@ module Types
     end
 
     # --- Playlists ---
-    field :playlists, [Types::PlaylistType], null: false,
+    field :playlists, [ Types::PlaylistType ], null: false,
       description: "Returns all playlists"
     def playlists
       Playlist.all

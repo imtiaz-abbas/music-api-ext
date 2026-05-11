@@ -7,7 +7,7 @@ module Mutations
     argument :artist_id, ID,      required: true
 
     field :song,   Types::SongType, null: true
-    field :errors, [String],        null: false
+    field :errors, [ String ],        null: false
 
     def resolve(title:, duration:, artist_id:)
       song = Song.new(title: title, duration: duration, artist_id: artist_id)

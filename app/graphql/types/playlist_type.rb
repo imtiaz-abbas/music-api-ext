@@ -6,6 +6,6 @@ module Types
 
     field :id,    ID,     null: false, description: "Unique identifier"
     field :name,  String, null: false, description: "Playlist name"
-    field :songs, [Types::SongType], null: false, description: "Ordered list of songs in this playlist"
+    field :songs, [ Types::SongType ], null: false, description: "Ordered list of songs in this playlist"
   end
 end

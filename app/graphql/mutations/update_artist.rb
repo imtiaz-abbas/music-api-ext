@@ -7,11 +7,11 @@ module Mutations
     argument :genre, String, required: false
 
     field :artist, Types::ArtistType, null: true
-    field :errors, [String],          null: false
+    field :errors, [ String ],          null: false
 
     def resolve(id:, **attrs)
       artist = Artist.find_by(id: id)
-      return { artist: nil, errors: ["Artist with id #{id} not found"] } unless artist
+      return { artist: nil, errors: [ "Artist with id #{id} not found" ] } unless artist
 
       if artist.update(attrs)
         { artist: artist, errors: [] }

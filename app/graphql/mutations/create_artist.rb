@@ -6,7 +6,7 @@ module Mutations
     argument :genre, String, required: true
 
     field :artist, Types::ArtistType, null: true
-    field :errors, [String], null: false
+    field :errors, [ String ], null: false
 
     def resolve(name:, genre:)
       artist = Artist.new(name: name, genre: genre)

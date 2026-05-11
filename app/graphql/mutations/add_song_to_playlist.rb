@@ -6,17 +6,17 @@ module Mutations
     argument :song_id,     ID, required: true
 
     field :playlist, Types::PlaylistType, null: true
-    field :errors,   [String],            null: false
+    field :errors,   [ String ],            null: false
 
     def resolve(playlist_id:, song_id:)
       playlist = Playlist.find_by(id: playlist_id)
       song     = Song.find_by(id: song_id)
 
       unless playlist
-        return { playlist: nil, errors: ["Playlist with id #{playlist_id} not found"] }
+        return { playlist: nil, errors: [ "Playlist with id #{playlist_id} not found" ] }
       end
       unless song
-        return { playlist: nil, errors: ["Song with id #{song_id} not found"] }
+        return { playlist: nil, errors: [ "Song with id #{song_id} not found" ] }
       end
 
       playlist_song = PlaylistSong.new(playlist: playlist, song: song)

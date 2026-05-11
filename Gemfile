@@ -48,11 +48,10 @@ group :development, :test do
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
 
-  gem 'graphiql-rails'
+  gem "graphiql-rails"
   gem "rspec-rails"
   gem "factory_bot_rails"
   gem "shoulda-matchers"
 end
 
-gem 'graphql'
-
+gem "graphql"
