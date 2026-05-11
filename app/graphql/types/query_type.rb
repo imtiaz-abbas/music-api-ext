@@ -2,36 +2,50 @@
 
 module Types
   class QueryType < Types::BaseObject
+    # --- Artists ---
     field :artists, [Types::ArtistType], null: false
-
     def artists
       Artist.all
     end
 
-    field :node, Types::NodeType, null: true, description: "Fetches an object given its ID." do
-      argument :id, ID, required: true, description: "ID of the object."
+    field :artist, Types::ArtistType, null: true do
+      argument :id, ID, required: true
+    end
+    def artist(id:)
+      Artist.find(id)
+    rescue ActiveRecord::RecordNotFound
+      nil
     end
 
-    def node(id:)
-      context.schema.object_from_id(id, context)
+    # --- Songs ---
+    field :songs, [Types::SongType], null: false
+    def songs
+      Song.all
     end
 
-    field :nodes, [Types::NodeType, null: true], null: true, description: "Fetches a list of objects given a list of IDs." do
-      argument :ids, [ID], required: true, description: "IDs of the objects."
+    field :song, Types::SongType, null: true do
+      argument :id, ID, required: true
+    end
+    def song(id:)
+      Song.find(id)
+    rescue ActiveRecord::RecordNotFound
+      nil
     end
 
-    def nodes(ids:)
-      ids.map { |id| context.schema.object_from_id(id, context) }
+    # --- Playlists ---
+    field :playlists, [Types::PlaylistType], null: false
+    def playlists
+      Playlist.all
     end
 
-    # Add root-level fields here.
-    # They will be entry points for queries on your schema.
-
-    # TODO: remove me
-    field :test_field, String, null: false,
-      description: "An example field added by the generator"
-    def test_field
-      "Hello World!"
+    field :playlist, Types::PlaylistType, null: true do
+      argument :id, ID, required: true
     end
+    def playlist(id:)
+      Playlist.find(id)
+    rescue ActiveRecord::RecordNotFound
+      nil
+    end
+
   end
 end
