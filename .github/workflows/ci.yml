@@ -88,3 +88,17 @@ jobs:
           # RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
           # REDIS_URL: redis://localhost:6379/0
         run: bin/rails db:test:prepare && bundle exec rspec
+
+      - name: Report coverage to job summary
+        if: always()
+        run: |
+          if [ -f coverage/.last_run.json ]; then
+            COVERAGE=$(jq -r '.result.line' coverage/.last_run.json)
+            echo "## Test Coverage" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
+            echo "| --- | --- |" >> $GITHUB_STEP_SUMMARY
+            echo "| Line Coverage | **${COVERAGE}%** |" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "Coverage report not found — SimpleCov may not have run." >> $GITHUB_STEP_SUMMARY
+          fi
