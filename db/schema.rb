@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_11_063347) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_12_105907) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -26,6 +26,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_11_063347) do
     t.bigint "playlist_id", null: false
     t.bigint "song_id", null: false
     t.datetime "updated_at", null: false
+    t.index ["playlist_id", "song_id"], name: "index_playlist_songs_unique", unique: true
     t.index ["playlist_id"], name: "index_playlist_songs_on_playlist_id"
     t.index ["song_id"], name: "index_playlist_songs_on_song_id"
   end
